@@ -1,20 +1,16 @@
-CREATE TABLE contacts (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100),
-    birthday DATE,
-    group_id INTEGER
-);
-
 CREATE TABLE groups (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) UNIQUE NOT NULL
 );
 
-ALTER TABLE contacts
-ADD CONSTRAINT fk_group
-FOREIGN KEY (group_id)
-REFERENCES groups(id);
+CREATE TABLE contacts (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    birthday DATE,
+    date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    group_id INTEGER REFERENCES groups(id)
+);
 
 CREATE TABLE phones (
     id SERIAL PRIMARY KEY,
